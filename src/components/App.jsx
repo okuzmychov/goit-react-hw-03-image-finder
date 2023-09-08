@@ -4,7 +4,9 @@ import { ErrorMsg, Layout } from './Layout';
 import { Searchbar } from './Searchbar/Searchbar';
 import { Loader } from './Loader/Loader';
 import { ImageGallery } from './ImageGallery/ImageGallery';
+import { Button } from "./Button/Button";
 import { serviceGetImages } from 'api';
+import { EndGallery } from "./EndGallery/EndGallery"
 import Modal from './Modal/Modal';
 
 export class App extends Component {
@@ -39,7 +41,7 @@ export class App extends Component {
     if (prevState.gallery !== this.state.gallery && this.state.query.page !== 1){
       this.scrollUp()
     }
-}
+};
   
   handleChange = (ev) => {
     this.setState(prevState=>({query: {...prevState.query, searchString: ev.target.value}}))

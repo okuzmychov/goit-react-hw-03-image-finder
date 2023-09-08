@@ -4,7 +4,7 @@ export const Button = ({ onClick }) => {
   return (
     <Panel>
       <LoadMore type="button" onClick={onClick}>
-        Load more
+        Завантажити більше...
       </LoadMore>
     </Panel>
   );
