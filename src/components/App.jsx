@@ -97,16 +97,10 @@ export class App extends Component {
   };
 
   render() {
-    const {
-      gallery,
-      loader,
-      error,
-      showModal,
-      selectedImage,
-      query: { searchString, page, perPage, totalHits, timeStamp },
-    } = this.state;
-    const showGallery = gallery.length > 0;
-    const showEndGallery = totalHits / perPage < page;
+    const { gallery, loader, error, showModal, selectedImage,
+    query: { searchString, perPage, page, totalHits, timeStamp }, } = this.state;
+    const showGallery = (gallery.length > 0);
+    const showEndGallery = ((totalHits / perPage) < page);
     const showBtnMore = !showEndGallery && showGallery;
     const showError = error && !showEndGallery;
 
@@ -118,7 +112,7 @@ export class App extends Component {
           onSubmit={this.handleSubmit}
         />
         {showGallery && (
-          <ImageGallery gallery={gallery} onClick={this.handleImgClick} />
+          <ImageGallery gallery={gallery} onImageClick={this.openModal} />
         )}
         {loader && <Loader />}
         {showBtnMore && <Button onClick={this.handleLoadMore} />}
@@ -135,7 +129,7 @@ export class App extends Component {
           </ErrorMsg>
         )}
         {showModal && (
-          <Modal largeImageURL={selectedImage} onClose={this.closeModal} />
+          <Modal largeImageURL={selectedImage} onClose={this.closeModal} isOpen={showModal}/>
         )}
         <GlobalStyle />
       </Layout>
