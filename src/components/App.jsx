@@ -1,6 +1,7 @@
 import { GlobalStyle } from './GlobalStyle';
 import { Component } from 'react';
 import { ErrorMsg, Layout } from './Layout';
+
 import { Searchbar } from './Searchbar/Searchbar';
 import { Loader } from './Loader/Loader';
 import { ImageGallery } from './ImageGallery/ImageGallery';
