@@ -28,6 +28,7 @@ export const StyledInput = styled.input`
   display: inline-block;
   font: inherit;
   font-size: 20px;
+  border-radius: 4px;
   border: none;
   outline: none;
   margin-left: auto;
@@ -42,6 +43,5 @@ export const SubmitBtn = styled.button`
   display: flex;
   align-items: center;
   background-color: transparent;
-  /* background-color: ${({ theme }) => theme.colors.grey}; */
   border: none;
 `;

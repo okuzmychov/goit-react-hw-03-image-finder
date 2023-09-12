@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { createPortal } from 'react-dom';
-import { BackDrop, CloseBtn, Content, Icon } from './Modal.styled';
+import { StyledModalOverlay, StyledModal } from './Modal.styled';
 
-const modalRoot = document.querySelector('#modal-root');
+// const modalRoot = document.querySelector('#modal-root');
 
-export default class Modal extends Component {
+export class Modal extends Component {
   componentDidMount() {
     window.addEventListener('keydown', this.handleKeyDown);
   }
@@ -19,23 +18,21 @@ export default class Modal extends Component {
     }
   };
 
-  handleBackdropClick = event => {
-    if (event.currentTarget === event.target) {
+  handleBackdropClick = e => {
+    if (e.target === e.currentTarget) {
       this.props.onClose();
     }
   };
 
   render() {
-    return createPortal(
-      <BackDrop onClick={this.handleBackdropClick}>
-        <Content>
-          <CloseBtn type="button" onClick={this.props.onClose}>
-            <Icon />
-          </CloseBtn>
-          {this.props.children}
-        </Content>
-      </BackDrop>,
-      modalRoot
+    const { largeImageURL } = this.props;
+
+    return (
+      <StyledModalOverlay onClick={this.handleBackdropClick}>
+        <StyledModal>
+          <img src={largeImageURL} alt="Large" />
+        </StyledModal>
+      </StyledModalOverlay>
     );
   }
 }

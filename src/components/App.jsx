@@ -7,7 +7,7 @@ import { ImageGallery } from './ImageGallery/ImageGallery';
 import { Button } from './Button/Button';
 import { serviceGetImages } from 'api';
 import { EndGallery } from './EndGallery/EndGallery';
-import Modal from './Modal/Modal';
+import { Modal } from './Modal/Modal';
 
 export class App extends Component {
   state = {
@@ -22,7 +22,7 @@ export class App extends Component {
     loader: false,
     error: false,
     showModal: false,
-    bigImgUrl: '',
+    selectedImage: '',
   };
 
   async componentDidUpdate(prevProps, prevState) {
@@ -87,14 +87,12 @@ export class App extends Component {
     }
   }
 
-  toggleModal = () => {
-    this.setState(({ showModal }) => ({
-      showModal: !showModal,
-    }));
+  openModal = largeImageURL => {
+    this.setState({ showModal: true, selectedImage: largeImageURL });
   };
 
-  handleImgClick = bigImgUrl => {
-    this.setState({ bigImgUrl, showModal: true });
+  closeModal = () => {
+    this.setState({ showModal: false, selectedImage: '' });
   };
 
   render() {
@@ -103,7 +101,7 @@ export class App extends Component {
       loader,
       error,
       showModal,
-      bigImgUrl,
+      selectedImage,
       query: { searchString, page, perPage, totalHits, timeStamp },
     } = this.state;
     const showGallery = gallery.length > 0;
@@ -136,9 +134,7 @@ export class App extends Component {
           </ErrorMsg>
         )}
         {showModal && (
-          <Modal onClose={this.toggleModal}>
-            <img src={bigImgUrl} alt="zoomed" />
-          </Modal>
+          <Modal largeImageURL={selectedImage} onClose={this.closeModal} />
         )}
         <GlobalStyle />
       </Layout>
